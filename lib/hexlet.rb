@@ -5,7 +5,7 @@ require 'hexlet/geobaseip'
 
 module Hexlet
   def self.geobaseip(ip)
-    doc = Nokogiri.XML(open("http://ipgeobase.ru:7020/geo?ip=#{ip}"))
+    doc = Nokogiri.XML(OpenURI.open_uri("http://ipgeobase.ru:7020/geo?ip=#{ip}"))
     Geobaseip.new(doc)
   end
 end
