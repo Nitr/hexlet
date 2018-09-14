@@ -1,7 +1,11 @@
+require 'nokogiri'
+require 'open-uri'
 require "hexlet/version"
-require 'hexlet/foo'
 require 'hexlet/geobaseip'
 
 module Hexlet
-  # Your code goes here...
+  def self.geobaseip(ip)
+    doc = Nokogiri.XML(open("http://ipgeobase.ru:7020/geo?ip=#{ip}"))
+    Geobaseip.new(doc)
+  end
 end
