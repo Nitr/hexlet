@@ -1,16 +1,21 @@
 require 'hexlet'
-require 'spec_helper'
 
 describe Hexlet::Geobaseip do
-  let(:response) { load_fixture('response.xml') }
-  let(:doc) { Nokogiri.XML(response) }
-  subject { described_class.new(doc)}
+  it do
+    not_found_response =  Nokogiri.XML(load_fixture('not_found.xml'))
+    geoipbase = Hexlet::Geobaseip.new(not_found_response)
 
-  it '#city returns Чебоксары' do
-    expect(subject.city).to eq('Чебоксары')
+    is_asserted_by {
+      geoipbase.city == nil
+    }
   end
 
-  it '#country returns RU' do
-    expect(subject.country).to eq('RU')
+  it do
+    found_response =  Nokogiri.XML(load_fixture('found.xml'))
+    geoipbase = Hexlet::Geobaseip.new(found_response)
+
+    is_asserted_by {
+      geoipbase.city == 'Чебоксары'
+    }
   end
 end

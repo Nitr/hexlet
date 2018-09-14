@@ -1,16 +1,16 @@
 require 'hexlet'
-require 'spec_helper'
 
 describe Hexlet do
-  let(:ip) { '95.81.209.168' }
-  let(:response) { load_fixture('response.xml') }
   before do
-    allow(OpenURI).to receive(:open_uri).and_return(response)
+    @ip = '95.81.209.168'
+    @request = stub_request(:get, Hexlet::API_URL)
+      .with(query: {ip: @ip})
+      .to_return(body: load_fixture('found.xml'))
   end
 
-  context '.geobaseip' do
-    subject { described_class.geobaseip(ip)}
+  it do
+    Hexlet.geobaseip(@ip)
 
-    it { is_expected.to be_instance_of(Hexlet::Geobaseip) }
+    assert_requested @request
   end
 end

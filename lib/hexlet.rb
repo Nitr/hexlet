@@ -4,8 +4,12 @@ require "hexlet/version"
 require 'hexlet/geobaseip'
 
 module Hexlet
+  API_URL = 'http://ipgeobase.ru:7020/geo'
+
   def self.geobaseip(ip)
-    doc = Nokogiri.XML(OpenURI.open_uri("http://ipgeobase.ru:7020/geo?ip=#{ip}"))
+    uri = URI(API_URL)
+    uri.query = URI.encode_www_form(ip: ip)
+    doc = Nokogiri.XML(open(uri))
     Geobaseip.new(doc)
   end
 end
