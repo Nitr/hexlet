@@ -7,10 +7,12 @@ require 'hexlet/Weather'
 module Hexlet
   API_URL = 'http://ipgeobase.ru:7020/geo'
 
-  def self.geobaseip(ip)
+  def self.geobaseip(ip, httpclient = Net::HTTP)
     uri = URI(API_URL)
     uri.query = URI.encode_www_form(ip: ip)
-    doc = Nokogiri.XML(open(uri))
+    response = httpclient.get_response(uri)
+    doc = Nokogiri.XML(response.body)
+
     Geobaseip.new(doc)
   end
 
