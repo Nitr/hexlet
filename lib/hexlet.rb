@@ -16,7 +16,7 @@ module Hexlet
     Geobaseip.new(doc)
   end
 
-  def self.weather(service_name, city)
+  def self.weather(city, service_name = 'MetaWeather')
     service = Hexlet::Weather.lookup_service_for(service_name)
     Hexlet::Weather.new(service).get_info(city)
   end

@@ -36,7 +36,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.2"
   spec.add_development_dependency "rspec-power_assert"
   spec.add_development_dependency "webmock"
+  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "httparty"
 
 
   spec.add_dependency "nokogiri"
+  spec.add_dependency "thor"
 end
